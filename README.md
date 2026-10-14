@@ -18,6 +18,7 @@ Súbor `.env` netreba, vývojové hodnoty sú v `docker-compose.yml`.
 - Zastavenie: `Ctrl+C`, alebo `docker compose down`
 - Vymazanie databázy (návrat k ukážkovým knihám): `docker compose down -v`
 - Po zmene kódu znova `docker compose up --build`
+- Výpis bežiaceho stacku (kontajnery, verzie, ukážka API): `sh docker/stack-info.sh`
 
 ## Čo aplikácia vie
 
