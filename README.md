@@ -40,5 +40,5 @@ Súbor `.env` netreba, vývojové hodnoty sú v `docker-compose.yml`.
 ## Testy
 
 ```bash
-docker run --rm -v "$PWD":/app -w /app composer:2 sh -c "composer install -q && php artisan test"
+docker run --rm -v "$PWD":/app -w /app composer:2 sh -c "touch .env && composer install -q && php artisan test"
 ```
