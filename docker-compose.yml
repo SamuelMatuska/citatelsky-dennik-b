@@ -1,6 +1,8 @@
 # Lokálny vývoj: `docker compose up --build` → http://localhost:8000
 # Súbor .env je nepovinný. Bez neho sa použijú vývojové hodnoty nižšie
 # (databáza nie je vystavená mimo Docker siete).
+name: citatelsky-dennik-b
+
 services:
   db:
     image: mariadb:11
