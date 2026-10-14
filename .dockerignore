@@ -1,0 +1,8 @@
+.env
+.git
+vendor
+node_modules
+frontend/node_modules
+public/index.html
+public/assets
+storage/logs/*
