@@ -13,8 +13,12 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->unsignedSmallInteger('publish_year');
-            $table->string('genre');
+            $table->string('genre', 40);
             $table->unsignedInteger('pages');
+            $table->string('isbn', 13)->nullable();
+            $table->string('status', 10)->default('unread');
+            $table->unsignedInteger('pages_read')->default(0);
+            $table->timestamps();
         });
     }
 

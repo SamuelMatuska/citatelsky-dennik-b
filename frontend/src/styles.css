@@ -1,0 +1,249 @@
+:root {
+  --paper: #eef1ec;
+  --surface: #ffffff;
+  --ink: #1e2a24;
+  --muted: #5f6f66;
+  --line: #d3dbd5;
+  --accent: #2f6b4f;
+  --accent-ink: #ffffff;
+  --brass: #b8901f;
+  --danger: #a33a2c;
+
+  --st-unread: #a9b4ad;
+  --st-reading: var(--brass);
+  --st-read: var(--accent);
+  --st-to_read: #3e5c8a;
+
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151b18;
+    --surface: #1d2521;
+    --ink: #e4ebe6;
+    --muted: #9aa9a0;
+    --line: #33403a;
+    --accent: #5fae86;
+    --accent-ink: #0f1713;
+    --brass: #d4ac3a;
+    --danger: #e0806f;
+    --st-unread: #56635b;
+    --st-to_read: #7d9cd0;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.5 var(--sans);
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 32px;
+}
+
+/* Hlavička */
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+h1, h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; margin: 0; }
+h2 { font-size: 1.5rem; margin: 0 0 16px; }
+.lede { margin: 8px 0 0; color: var(--muted); max-width: 60ch; }
+
+/* Polica */
+.shelf { margin: 32px 0 8px; }
+.shelf-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  min-height: 150px;
+  padding: 0 12px;
+  border-bottom: 10px solid #6b4e2e;
+  border-radius: 0 0 2px 2px;
+  overflow-x: auto;
+}
+.spine {
+  flex: none;
+  width: var(--w);
+  height: 140px;
+  position: relative;
+  border-radius: 3px 3px 0 0;
+  background: color-mix(in srgb, var(--st) 28%, var(--surface));
+  outline: 1px solid color-mix(in srgb, var(--st) 55%, transparent);
+  outline-offset: -1px;
+  overflow: hidden;
+}
+.spine:nth-child(3n) { height: 128px; }
+.spine:nth-child(4n + 1) { height: 148px; }
+.spine::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--fill);
+  background: var(--st);
+}
+.spine-title {
+  position: absolute;
+  inset: 8px 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  font: 600 0.8rem/1 var(--serif);
+  color: var(--ink);
+  mix-blend-mode: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spine-unread { --st: var(--st-unread); }
+.spine-reading { --st: var(--st-reading); }
+.spine-read { --st: var(--st-read); }
+.spine-to_read { --st: var(--st-to_read); }
+.spine-read .spine-title { color: var(--accent-ink); }
+
+.shelf-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 12px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.legend-dot { width: 10px; height: 14px; border-radius: 2px; background: var(--st); }
+
+/* Tlačidlá a polia */
+.btn {
+  font: 600 0.95rem/1 var(--sans);
+  padding: 11px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--muted); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.08); border-color: var(--accent); }
+.btn-quiet { background: transparent; border-color: transparent; padding: 8px 10px; font-weight: 500; color: var(--accent); }
+.btn-quiet:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); border-color: transparent; }
+.btn-danger { color: var(--danger); }
+.btn-danger:hover { background: color-mix(in srgb, var(--danger) 10%, transparent); }
+
+input, select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 11px;
+  min-width: 0;
+}
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
+
+/* Formulár */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 32px 0 0;
+}
+.catalog { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px dashed var(--line); }
+.catalog-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.catalog-form input { flex: 1 1 220px; }
+.results { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+.result {
+  width: 100%;
+  text-align: left;
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.result:hover { background: var(--paper); border-color: var(--line); }
+
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.field { display: grid; gap: 6px; align-content: start; }
+.field-wide { grid-column: span 2; }
+.field-label { font-size: 0.875rem; font-weight: 600; }
+.has-error input, .has-error select { border-color: var(--danger); }
+.field-error { color: var(--danger); font-size: 0.85rem; margin: 4px 0 0; }
+.form-actions { display: flex; gap: 8px; margin-top: 24px; }
+
+.alert {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+  color: var(--danger);
+}
+
+/* Tabuľka kníh */
+main { margin-top: 32px; }
+.books { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.books th { text-align: left; font-size: 0.85rem; color: var(--muted); font-weight: 600; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.books td { padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.books tr:last-child td { border-bottom: 0; }
+.books td:first-child { min-width: 13em; }
+.books td[data-label='Stav'] select { max-width: 13.5em; }
+.book-title { display: block; font: 600 1.08rem/1.25 var(--serif); }
+.book-author { display: block; color: var(--muted); font-size: 0.9rem; }
+
+.status { font-weight: 600; border-left: 6px solid var(--st); }
+.status-unread { --st: var(--st-unread); }
+.status-reading { --st: var(--st-reading); }
+.status-read { --st: var(--st-read); }
+.status-to_read { --st: var(--st-to_read); }
+
+.progress-cell { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.progress-cell input { width: 5.5em; padding: 6px 8px; }
+.of { color: var(--muted); }
+.percent { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; }
+.bar { height: 6px; margin-top: 8px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--brass); border-radius: 3px; }
+.actions { text-align: right; white-space: nowrap; }
+
+.empty { padding: 32px; text-align: center; color: var(--muted); background: var(--surface); border: 1px dashed var(--line); border-radius: 14px; }
+.footer { margin-top: 48px; color: var(--muted); font-size: 0.875rem; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Mobil: riadky tabuľky ako karty */
+@media (max-width: 760px) {
+  .page { padding: 28px 16px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .field-wide { grid-column: 1 / -1; }
+  .books, .books tbody, .books tr, .books td { display: block; }
+  .books thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .books tr { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .books td { padding: 4px 0; border: 0; min-width: 0; }
+  .books td[data-label='Rok'], .books td[data-label='Žáner'] { display: inline-block; color: var(--muted); font-size: 0.9rem; margin-right: 12px; }
+  .books td[data-label='Stav'] select { width: 100%; max-width: none; margin-top: 6px; }
+  .actions { text-align: left; margin-left: -10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

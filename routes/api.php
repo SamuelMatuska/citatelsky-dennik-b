@@ -1,6 +1,8 @@
 <?php
 
-use App\Models\Book;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\CatalogController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/books', fn () => Book::all());
+Route::apiResource('books', BookController::class)->except('show');
+Route::get('/catalog/search', [CatalogController::class, 'search']);
